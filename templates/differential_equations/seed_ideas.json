@@ -1,0 +1,26 @@
+[
+    {
+        "Name": "parameter_sensitivity_analysis",
+        "Title": "Parameter Sensitivity Analysis for Differential Equation Solutions",
+        "Experiment": "Modify the differential equation solver to systematically vary key parameters (e.g., initial conditions, coefficients) and analyze how these changes affect the analytical solution. Implement parameter sweeps and generate sensitivity plots showing the relationship between parameter values and solution characteristics. This will provide insights into how robust the solutions are to parameter variations.",
+        "Interestingness": 8,
+        "Feasibility": 9,
+        "Novelty": 7
+    },
+    {
+        "Name": "boundary_condition_exploration",
+        "Title": "Exploring Different Boundary Conditions in Differential Equations",
+        "Experiment": "Extend the differential equation solver to handle various boundary conditions (Dirichlet, Neumann, mixed) and compare how different boundary conditions affect the analytical solution. Implement a framework to systematically test different boundary condition combinations and analyze their impact on solution behavior and stability.",
+        "Interestingness": 9,
+        "Feasibility": 8,
+        "Novelty": 8
+    },
+    {
+        "Name": "higher_order_equations",
+        "Title": "Solving Higher-Order Differential Equations Analytically",
+        "Experiment": "Extend the solver to handle second-order and higher-order differential equations. Implement methods for solving linear and nonlinear higher-order ODEs, including characteristic equation methods for linear equations and series solution methods for nonlinear cases. Compare analytical solutions with numerical approximations for various equation orders.",
+        "Interestingness": 9,
+        "Feasibility": 7,
+        "Novelty": 9
+    }
+]
