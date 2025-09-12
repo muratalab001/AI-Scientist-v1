@@ -1,0 +1,61 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Random generation of elements of $\mathfrak{so}(n)$ and its complexification}
+\label{sec:Gaussian_SOn}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Let $\{T_a\}$ $(a = 1,\ldots, N\,(=\dim \mathfrak{so}(n)))$ be a basis of the Lie algebra $\mathfrak{so}(n)$, satisfying
+$T_a^T = -T_a$ and $-\tr (T_a T_b) = \delta_{ab}$.
+We present algorithms for generating random elements $X = T_a x^a \in \mathfrak{so}(n)$ $(x^a \in \mathbb{R})$ according to the Gaussian distribution $e^{-\langle X,X\rangle/(2\sigma^2)} = e^{-(x^a)^2/(2\sigma^2)}$,
+\begin{align}
+  \langle x^a \rangle = 0,\quad \langle x^a x^b \rangle = \sigma^2\,\delta^{ab},
+\end{align}
+and also for generating random element $Z = T_a z^a \in \mathfrak{so}(n)_\mathbb{C}$ $(z^a \in \mathbb{C})$ according to the Gaussian distribution $e^{-\langle Z,Z\rangle/(2\sigma^2)} = e^{- \overline{z^a} z^a/(2\sigma^2)}$,
+\begin{align}
+  \langle z^a \rangle = 0,\quad \langle z^a z^b \rangle = \langle \overline{z^a} \overline{z^b} \rangle = 0,\quad \langle z^a \overline{z^b} \rangle = 2\sigma^2\,\delta^{ab}.
+\end{align}
+As in the $SU(n)$ case, a direct algorithm is to generate $x^a$ and $y^a$ ($a=1,\ldots,N$) from the standard Gaussian and set $X = T_a x^a$ and $Z = T_a (x^a + i y^a)$. Below we present an algorithm that does not use the explicit form of $T_a$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{$G = SO(n)$}
+\label{sec:Gaussian_SO(n)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In this case, $N = \dim \mathfrak{so}(n) = n(n-1)/2$. A random variable $X = T_a x^a \in \mathfrak{so}(n) = \mathrm{Lie}\,SO(n)$ satisfying the above Gaussian can be constructed by the following two steps:
+
+\noindent\underline{(1)}: Generate an independent Gaussian random matrix $\xi = (\xi_{ij})$,
+\begin{align}
+  \xi_{ij} \sim e^{-\xi_{ij}^2/(2\sigma^2)}\quad (i,j = 1,\ldots,n).
+\end{align}
+
+\noindent\underline{(2)}: Set $X = (X_{ij})$ as the real antisymmetric projection
+\begin{align}
+  X = \tfrac{1}{2}\,(\xi - \xi^T),
+\end{align}
+which manifestly satisfies $X^T = -X$ and hence $X \in \mathfrak{so}(n)$.
+
+To verify that this construction yields the desired distribution, write $x^a = -\tr (T_a X) = \tr (T^a X) = T^a_{ji} X_{ij}$. Then
+\begin{align}
+  \langle x^a \rangle = T^a_{ji}\,\langle X_{ij} \rangle = 0.
+\end{align}
+For the second moment,
+\begin{align}
+  \langle X_{ij} X_{kl} \rangle
+  &= \tfrac{1}{4}\,\Bigl\langle (\xi_{ij} - \xi_{ji})(\xi_{kl} - \xi_{lk}) \Bigr\rangle
+   = \tfrac{\sigma^2}{2}\,(\delta_{il}\,\delta_{jk} - \delta_{ik}\,\delta_{jl}),
+\end{align}
+so that
+\begin{align}
+  \langle x^a x^b \rangle = T^a_{ji} T^b_{lk} \langle X_{ij} X_{kl} \rangle
+  = -\sigma^2\,\tr (T^a T^b) = \sigma^2\,\delta^{ab},
+\end{align}
+as required by the normalization $-\tr(T_a T_b)=\delta_{ab}$.
+
+For the complexified algebra $\mathfrak{so}(n)_\mathbb{C}$, generate two i.i.d. real Gaussian matrices $\xi$ and $\eta$ and set
+\begin{align}
+  Z = \tfrac{1}{2}(\xi - \xi^T) + \tfrac{i}{2}(\eta - \eta^T),
+\end{align}
+which distributes the coordinates $z^a$ as independent complex Gaussians with variance $2\sigma^2$.
+
+
