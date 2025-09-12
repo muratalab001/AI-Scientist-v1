@@ -1,0 +1,22 @@
+import numpy as np
+
+def hermitian(X):
+    # エルミート共役（随伴）：複素共役の転置
+    return X.conj().T
+
+def ndist_matrix(nc):
+    # 平均0, 分散1の正規分布に従う実数値行列
+    return np.random.normal(0.0, 1.0, size=(nc, nc))
+
+def generate_lie_su(nc):
+    # 反エルミート化してからトレースを落として su(n) の元にする
+    tmp = 0.5 * (ndist_matrix(nc) + 1j * ndist_matrix(nc))
+    tmp = tmp - hermitian(tmp)  # 反エルミート化
+    tmp = tmp - (np.trace(tmp) / nc) * np.eye(nc, dtype=complex)  # traceless 化
+    return tmp
+
+def generate_lie_sl(nc):
+    # 複素行列を作ってからトレースを落として sl(n, C) の元にする
+    tmp = ndist_matrix(nc) + 1j * ndist_matrix(nc)
+    tmp = tmp - (np.trace(tmp) / nc) * np.eye(nc, dtype=complex)  # traceless 化
+    return tmp

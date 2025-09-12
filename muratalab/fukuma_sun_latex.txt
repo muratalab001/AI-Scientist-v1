@@ -1,0 +1,112 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Random generation of elements of $\LieG$ and $\LieGC$}
+\label{sec:Gaussian}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+Let $\{T_a\}$ $(a = 1,\ldots, N\,(=\dimG))$ be 
+a basis of the Lie algebra $\LieG$, 
+satisfying 
+$T_a^\dagger = -T_a$ and $\tr (T_a T_b) = -\delta_{ab}$. 
+We present algorithms 
+for generating random elements $X = T_a x^a \in \LieG$ $(x^a \in \bbR)$ 
+according to the Gaussian distribution 
+$e^{-\vev{X,X}/(2\sigma^2)} = e^{-(x^a)^2/(2\sigma^2)}$, 
+\begin{align}
+  \vev{x^a} = 0,
+  \quad
+  \vev{x^a x^b} = \sigma^2\,\delta^{ab},
+\label{Gaussian_LieG}
+\end{align}
+and also for generating random element 
+$Z = T_a z^a \in \LieGC$ $(z^a \in \bbC)$ 
+according to the Gaussian distribution 
+$e^{-\vev{Z,Z}/(2\sigma^2)} = e^{- \overline{z^a} z^a/(2\sigma^2)}$, 
+\begin{align}
+  \vev{z^a} = 0,
+  \quad
+  \vev{z^a z^b} = \vev{\overline{z^a} \overline{z^b}} = 0,
+  \quad
+  \vev{z^a \overline{z^b} } = 2\sigma^2\,\delta^{ab}.
+\label{Gaussian_LieGC}
+\end{align}
+A direct algorithm is to generate $x^a$ and $y^a$ ($a=1,\ldots,N$) 
+from $\propto e^{-(x^a)^2/(2\sigma^2)}$ 
+and $\propto e^{-(y^a)^2/(2\sigma^2)}$, 
+respectively, 
+and set $X = T_a x^a$ and $Z = T_a (x^a + i y^a)$. 
+In the following, 
+we present an algorithm 
+that does not use the explicit form of $T_a$. 
+Throughout this section, 
+we restrict our discussions to the cases 
+where $G = SU(n)$ or $G = U(n)$. 
+Other classical compact groups can be treated similarly.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{$G = SU(n)$}
+\label{sec:Gaussian_SU(n)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In this case, 
+$N = \dimG = n^2 - 1$.
+A random variable $X = T_a x^a \in \mathfrak{su}(n) = \textrm{Lie}\,SU(n)$ 
+satisfying Eq.~\eqref{Gaussian_LieG} 
+can be constructed by the following two steps:
+
+\noindent
+\underline{(1)}: 
+Generate two sets of independent Gaussian random variables 
+$\xi = (\xi_{ij})$ and $\eta = (\eta_{ij})$,
+\begin{align}
+  \xi_{ij} \sim e^{-\xi_{ij}^2/(2\sigma^2)},
+  \quad
+  \eta_{ij} \sim e^{-\eta_{ij}^2/(2\sigma^2)}
+  \quad
+  (i,j = 1,\ldots,N).
+\end{align}
+
+\noindent
+\underline{(2)}: Set $X = (X_{ij})$ as 
+\begin{align}
+  X = \frac{1}{2}\,(\xi - \xi^T) + \frac{i}{2}\,(\eta + \eta^T)
+  - \frac{i}{n}\,(\tr\eta)\,1,
+\end{align}
+where $1$ is the $n\times n$ identity matrix. 
+
+
+To verify that this construction yields the desired distribution, 
+note that $x^a$ are given by 
+$x^a = -\tr (T_a X) = \tr (T^a X) = T^a_{ji} X_{ij}$. 
+Thus, the first moment becomes 
+\begin{align}
+  \vev{x^a} = T^a_{ji}\,\vev{X_{ij}} 
+  = T^a_{ji} \times \vev{\mbox{(terms linear in $\xi$ and $\eta$)}}= 0.
+\end{align}
+For the second moment, 
+note that 
+$\vev{X_{ij} X_{kl}}$ in 
+\begin{align}
+  \vev{x^a x^b} = T^a_{ji}\,T^b_{lk}\,\vev{X_{ij} X_{kl}}
+\end{align}
+can be computed as  
+\begin{align}
+  \vev{X_{ij} X_{kl}}
+  &= \frac{1}{4}\,\Bigl[
+  \vev{ (\xi_{ij} - \xi_{ji}) (\xi_{kl} - \xi_{lk}) }
+  - \Bigl\langle \Bigl(\eta_{ij} + \eta_{ji} - \frac{2}{n}\,\eta_{pp}\,\delta_{ij}\Bigr) 
+    \Bigl(\eta_{kl} + \eta_{lk} - \frac{2}{n}\,\eta_{qq}\,\delta_{kl}\Bigr) \Bigr\rangle
+  \Bigr]
+\nonumber
+\\
+  &= -\sigma^2\,
+  \Bigl( \delta_{il}\,\delta_{jk} - \frac{1}{n}\,\delta_{ij}\,\delta_{kl} \Bigr),
+\end{align}
+so that we have 
+\begin{align}
+  \vev{x^a x^b} = -\sigma^2\,\tr (T^a T^b) = \sigma^2 \delta^{ab}.
+\end{align}
+
