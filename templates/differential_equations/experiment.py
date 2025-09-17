@@ -118,3 +118,4 @@ if __name__ == "__main__":
     print(f"Analytical solution: {analytical_solution}")
     print(f"Mean Squared Error: {mse:.6f}")
     print(f"Relative Error: {relative_error:.2f}%")
+

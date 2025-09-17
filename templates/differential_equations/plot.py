@@ -204,3 +204,4 @@ if __name__ == "__main__":
     print("- error_analysis.png")
     print("- solution_characteristics.png")
     print("- equation_comparison.png")
+

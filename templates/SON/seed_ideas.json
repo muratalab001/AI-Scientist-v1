@@ -1,0 +1,10 @@
+[
+    {
+        "Name": "so_n_gauge_dynamics",
+        "Title": "Numerical Experiments on the Dynamics of SO(N) Gauge Groups",
+        "Experiment": "Numerically analyze the matrix generation, operators, and dynamics of SO(N) gauge groups, and investigate the differences from SU(N).",
+        "Interestingness": 9,
+        "Feasibility": 8,
+        "Novelty": 9
+    }
+]

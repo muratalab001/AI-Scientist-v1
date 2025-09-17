@@ -1,0 +1,20 @@
+[
+    {
+        "Name": "so_n_gauge_dynamics",
+        "Title": "Numerical Experiments on the Dynamics of SO(N) Gauge Groups",
+        "Experiment": "Replace the numerical experiments previously performed with SU(N) gauge groups by those with SO(N) gauge groups, and compare the differences in matrix generation, operators, and dynamics. Investigate phenomena unique to SO(N), numerical stability, and differences in physical meaning.",
+        "Interestingness": 9,
+        "Feasibility": 8,
+        "Novelty": 9,
+        "novel": true
+    },
+    {
+        "Name": "so_n_vs_su_n_comparison",
+        "Title": "Comparative Experiments of SO(N) and SU(N) Gauge Groups",
+        "Experiment": "Conduct numerical experiments using SO(N) and SU(N) gauge groups under the same initial conditions and parameters, and quantitatively compare the differences in dynamics and observables.",
+        "Interestingness": 8,
+        "Feasibility": 8,
+        "Novelty": 8,
+        "novel": true
+    }
+]
