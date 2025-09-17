@@ -1,20 +1,20 @@
 [
     {
-        "Name": "so_n_gauge_dynamics",
-        "Title": "Numerical Experiments on the Dynamics of SO(N) Gauge Groups",
-        "Experiment": "Replace the numerical experiments previously performed with SU(N) gauge groups by those with SO(N) gauge groups, and compare the differences in matrix generation, operators, and dynamics. Investigate phenomena unique to SO(N), numerical stability, and differences in physical meaning.",
-        "Interestingness": 9,
-        "Feasibility": 8,
-        "Novelty": 9,
+        "Name": "trace_distribution_so_n",
+        "Title": "Statistical Analysis of Trace Distribution in Random SO(N) Matrices",
+        "Experiment": "Generate a large number of random SO(N) matrices and analyze the distribution of their traces. Compare the empirical distribution to theoretical predictions, if available. Investigate how the distribution changes with N.",
+        "Interestingness": 8,
+        "Feasibility": 9,
+        "Novelty": 7,
         "novel": true
     },
     {
-        "Name": "so_n_vs_su_n_comparison",
-        "Title": "Comparative Experiments of SO(N) and SU(N) Gauge Groups",
-        "Experiment": "Conduct numerical experiments using SO(N) and SU(N) gauge groups under the same initial conditions and parameters, and quantitatively compare the differences in dynamics and observables.",
-        "Interestingness": 8,
-        "Feasibility": 8,
-        "Novelty": 8,
+        "Name": "determinant_distribution_so_n",
+        "Title": "Empirical Study of Determinant Distribution in Random SO(N) Matrices",
+        "Experiment": "Generate random SO(N) matrices and analyze the distribution of their determinants. Confirm that all determinants are +1, as required by the definition of SO(N). Investigate numerical stability and deviations for large N.",
+        "Interestingness": 7,
+        "Feasibility": 9,
+        "Novelty": 6,
         "novel": true
     }
 ]

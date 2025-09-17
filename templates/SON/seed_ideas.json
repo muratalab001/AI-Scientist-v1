@@ -1,10 +1,10 @@
 [
     {
-        "Name": "so_n_gauge_dynamics",
-        "Title": "Numerical Experiments on the Dynamics of SO(N) Gauge Groups",
-        "Experiment": "Numerically analyze the matrix generation, operators, and dynamics of SO(N) gauge groups, and investigate the differences from SU(N).",
-        "Interestingness": 9,
-        "Feasibility": 8,
-        "Novelty": 9
+        "Name": "trace_distribution_so_n",
+        "Title": "Statistical Analysis of Trace Distribution in Random SO(N) Matrices",
+        "Experiment": "Generate a large number of random SO(N) matrices and analyze the distribution of their traces. Compare the empirical distribution to theoretical predictions, if available. Investigate how the distribution changes with N.",
+        "Interestingness": 8,
+        "Feasibility": 9,
+        "Novelty": 7
     }
 ]

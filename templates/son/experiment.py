@@ -1,37 +1,51 @@
 import argparse
 import json
 import os
+
 import numpy as np
-from scipy.stats import ortho_group
+
+parser = argparse.ArgumentParser(description="Run SO(N) experiment")
+parser.add_argument("--out_dir", type=str, default="run_0", help="Output directory")
+parser.add_argument("--N", type=int, default=5, help="Dimension of SO(N)")
+parser.add_argument("--num_samples", type=int, default=1000, help="Number of random matrices")
+args = parser.parse_args()
 
 def random_so_n(n):
-    # Generate an orthogonal matrix with det=1 (SO(N))
-    Q = ortho_group.rvs(dim=n)
+    # Generate a random matrix from the Haar measure on SO(n)
+    A = np.random.randn(n, n)
+    Q, R = np.linalg.qr(A)
+    # Ensure determinant is +1
     if np.linalg.det(Q) < 0:
-        Q[:, 0] *= -1
+        Q[:, 0] = -Q[:, 0]
     return Q
-
-parser = argparse.ArgumentParser(description="Numerical experiments for SO(N) gauge group")
-parser.add_argument("--out_dir", type=str, default="run_0", help="Output directory")
-parser.add_argument("--N", type=int, default=3, help="N for SO(N)")
-args = parser.parse_args()
 
 if __name__ == "__main__":
     out_dir = args.out_dir
     os.makedirs(out_dir, exist_ok=True)
     N = args.N
+    num_samples = args.num_samples
 
-    # Generate samples of SO(N) matrices
-    so_n_matrices = [random_so_n(N) for _ in range(10)]
+    # Generate random SO(N) matrices and compute statistics
+    traces = []
+    determinants = []
+    for _ in range(num_samples):
+        M = random_so_n(N)
+        traces.append(np.trace(M))
+        determinants.append(np.linalg.det(M))
 
-    # Example: Calculate eigenvalues of each matrix
-    eigvals = [np.linalg.eigvals(M).tolist() for M in so_n_matrices]
-
-    # Save results
-    result = {
-        "N": N,
-        "eigvals": eigvals,
-        "description": "Eigenvalue spectra of 10 SO(N) matrices"
+    means = {
+        "trace_mean": float(np.mean(traces)),
+        "trace_std": float(np.std(traces)),
+        "determinant_mean": float(np.mean(determinants)),
+        "determinant_std": float(np.std(determinants)),
     }
-    with open(os.path.join(out_dir, "final_info.json"), "w", encoding="utf-8") as f:
-        json.dump(result, f, ensure_ascii=False, indent=2)
+
+    final_info = {
+        "SO(N)": {
+            "means": means,
+            "traces": traces,
+            "determinants": determinants,
+        }
+    }
+    with open(os.path.join(out_dir, "final_info.json"), "w") as f:
+        json.dump(final_info, f)
