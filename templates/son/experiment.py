@@ -30,8 +30,8 @@ if __name__ == "__main__":
     determinants = []
     for _ in range(num_samples):
         M = random_so_n(N)
-        traces.append(np.trace(M))
-        determinants.append(np.linalg.det(M))
+        traces.append(float(np.trace(M).real))
+        determinants.append(float(np.linalg.det(M).real))
 
     means = {
         "trace_mean": float(np.mean(traces)),
