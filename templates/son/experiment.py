@@ -49,3 +49,4 @@ if __name__ == "__main__":
     }
     with open(os.path.join(out_dir, "final_info.json"), "w") as f:
         json.dump(final_info, f)
+

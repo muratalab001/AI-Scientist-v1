@@ -77,3 +77,4 @@ which verifies Eq.~\eqref{Gaussian_LieGC_SO}.
   \item The construction \eqref{eq:so_n_construct} and \eqref{eq:so_nc_construct} uses only matrix-level operations (antisymmetrization) and does not require an explicit basis $\{T_a\}$.
   \item Other classical compact groups can be treated similarly by projecting a full Gaussian matrix onto the corresponding Lie algebra with respect to the chosen inner product and constraints (e.g., tracelessness for $\mathfrak{su}(n)$, symmetry/antisymmetry conditions for $\mathfrak{sp}(n)$, etc.).
 \end{itemize}
+
