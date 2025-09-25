@@ -37,7 +37,7 @@ def run_experiment(folder_name, run_num, timeout=7200):
 
     # LAUNCH COMMAND
     command = [
-        "python",
+        "python3",
         "experiment.py",
         f"--out_dir=run_{run_num}",
     ]
@@ -89,7 +89,7 @@ def run_plotting(folder_name, timeout=600):
     cwd = osp.abspath(folder_name)
     # LAUNCH COMMAND
     command = [
-        "python",
+        "python3",
         "plot.py",
     ]
     try:

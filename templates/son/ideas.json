@@ -1,0 +1,29 @@
+[
+    {
+        "Name": "trace_distribution_so_n",
+        "Title": "Statistical Analysis of Trace Distribution in Random SO(N) Matrices",
+        "Experiment": "Generate a large number of random SO(N) matrices and analyze the distribution of their traces. Compare the empirical distribution to theoretical predictions, if available. Investigate how the distribution changes with N.",
+        "Interestingness": 8,
+        "Feasibility": 9,
+        "Novelty": 7,
+        "novel": false
+    },
+    {
+        "Name": "eigenvalue_spacing_so_n",
+        "Title": "Eigenvalue Spacing Statistics of Haar Random SO(N) Matrices and Comparison with Circular Orthogonal Ensemble Predictions",
+        "Experiment": "Augment the code with a function that extracts eigenvalues of each random SO(N) matrix, converts them to angles, sorts them, and computes nearest-neighbour spacings (including wrap-around). Normalise each spacing by the mean spacing of that matrix (unfolding). Aggregate spacings over all samples and for several N values. Produce histograms and compute quantitative fit (e.g. KS distance) to the \u03b2=1 Wigner surmise P(s)=(\u03c0/2)s exp(\u2212\u03c0 s^2/4). Study how the empirical distribution approaches the theoretical prediction as N increases.",
+        "Interestingness": 9,
+        "Feasibility": 8,
+        "Novelty": 8,
+        "novel": false
+    },
+    {
+        "Name": "matrix_element_gaussianity",
+        "Title": "Gaussianity and Concentration of Rescaled Entries in Haar Random SO(N) Matrices",
+        "Experiment": "Extend the script so that, for each sampled SO(N) matrix, every entry is rescaled by sqrt(N). Collect either all rescaled entries or a random subset to control memory, and repeat for several N values (e.g. 3, 5, 10, 20, 50, 100). For each N compute (i) histogram or KDE of rescaled entries, (ii) first four moments, (iii) Kolmogorov\u2013Smirnov distance to the standard normal, and (iv) optional pairwise entry correlations. Plot KS distance, skewness, and excess kurtosis versus N to illustrate convergence to Gaussian behaviour, providing an empirical demonstration of the local central-limit phenomenon for Haar random orthogonal matrices.",
+        "Interestingness": 7,
+        "Feasibility": 9,
+        "Novelty": 6,
+        "novel": false
+    }
+]
