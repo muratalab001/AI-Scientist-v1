@@ -9,21 +9,21 @@
         "novel": true
     },
     {
-        "Name": "progressive_dataset_reveal",
-        "Title": "Progressive Dataset Reveal: Curriculum Learning to Probe Grokking Dynamics",
-        "Experiment": "Implement CurriculumDataset(dataset, init_frac=0.05) that stores dataset.train_pairs. It keeps active_pairs, initially a random subset of size int(init_frac*len(train_pairs)). Override fetch_train_example() to sample from active_pairs. Add grow(factor, max_size) to expand active_pairs. In run(), add arg schedule_type in ['static','linear','exp','full']. Every GROW_STEP (e.g. 500 updates) call grow(): static does nothing, linear adds +delta examples, exp multiplies active size by 2, full starts with all pairs. Log: active_size, step_val_acc_99, final metrics. Compare across schedules for each task and seed, focusing on time-to-grokking and data revealed when grokking occurs.",
-        "Interestingness": 7,
+        "Name": "capacity_grokking",
+        "Title": "Sizing Up Grokking: How Model Capacity Governs the Memorisation\u2013Generalisation Transition",
+        "Experiment": "Expose --num_layers and --dim_model flags. Set num_heads = max(1, dim_model // 32) for divisibility. Grid: num_layers \u2208 {1,2,4}, dim_model \u2208 {64,128,256}. For each run record: parameter_count, step_when_train_acc_95, step_when_val_acc_95, step_val_acc_99. Compute grokking_gap = val95_step - train95_step. Plot grokking_gap and step_val_acc_99 versus log(parameter_count) across all four datasets. Analyse whether capacity lengthens or shortens the gap and affects sample efficiency.",
+        "Interestingness": 8,
         "Feasibility": 8,
-        "Novelty": 6,
-        "novel": true
+        "Novelty": 7,
+        "novel": false
     },
     {
-        "Name": "wd_phase_transition",
-        "Title": "Weight-Decay Phase Transition: Mapping Grokking Dynamics across Magnitude and Onset",
-        "Experiment": "Add WeightDecayScheduler that at each step sets optimizer.param_groups[0]['weight_decay'] to (0 if step < onset_step else target_wd). In run(), loop over wd_targets=[0,1e-4,1e-3,1e-2,0.1,0.5] and onset_steps=[0,1000,3000,5000]. Keep other hyper-params fixed. Log: current weight_decay, parameter L2 norm, step_train_acc_99, step_val_acc_99, grokking_time = step_val_acc_99 \u2212 step_train_acc_99 (if positive). Aggregate per task into heat-maps of grokking_time and final accuracy versus (wd,onset).",
-        "Interestingness": 8,
+        "Name": "weight_decay_phase",
+        "Title": "The Regularisation Phase Transition: Mapping Grokking as a Function of Weight Decay",
+        "Experiment": "Expose a --weight_decay flag in experiment.py (passed to AdamW). Grid-search wd \u2208 {0.0,1e-4,3e-4,1e-3,3e-3,1e-2,3e-2,1e-1,3e-1}. For each dataset and three seeds, log: step_train_acc_95, step_val_acc_95, step_val_acc_99, final accuracies. Define grok_gap = step_val95 - step_train95 (\u22121 if val never \u2265.95). Implement optional early-stop: if both train and val acc stay <0.2 for 3000 updates, terminate run. Aggregate results, plot grok_gap and step_val_acc_99 vs log10(wd) for every task to reveal a critical weight-decay band that maximises the grokking gap, supporting a phase-transition view of implicit regularisation.",
+        "Interestingness": 9,
         "Feasibility": 9,
-        "Novelty": 7,
-        "novel": true
+        "Novelty": 8,
+        "novel": false
     }
 ]
