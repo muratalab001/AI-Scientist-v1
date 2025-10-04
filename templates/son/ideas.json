@@ -9,21 +9,21 @@
         "novel": false
     },
     {
-        "Name": "eigenvalue_spacing_so_n",
-        "Title": "Eigenvalue Spacing Statistics of Haar Random SO(N) Matrices and Comparison with Circular Orthogonal Ensemble Predictions",
-        "Experiment": "Augment the code with a function that extracts eigenvalues of each random SO(N) matrix, converts them to angles, sorts them, and computes nearest-neighbour spacings (including wrap-around). Normalise each spacing by the mean spacing of that matrix (unfolding). Aggregate spacings over all samples and for several N values. Produce histograms and compute quantitative fit (e.g. KS distance) to the \u03b2=1 Wigner surmise P(s)=(\u03c0/2)s exp(\u2212\u03c0 s^2/4). Study how the empirical distribution approaches the theoretical prediction as N increases.",
+        "Name": "eigen_spacing_so_n",
+        "Title": "Level-Spacing Statistics of Haar-Random SO(N) Matrices and Comparison to the Circular Orthogonal Ensemble",
+        "Experiment": "Extend experiment.py by adding a function eigen_level_spacings(M) that computes sorted eigen-phases (angles) of M, normalises nearest-neighbour spacings so the mean is 1, and returns all spacings. In the main loop, accumulate spacings across all samples. Also test uniformity of raw eigen-phases. For each chosen N (e.g., 3, 5, 10, 20), build a histogram of spacings, compute the Kolmogorov\u2013Smirnov distance between the empirical CDF and the Wigner surmise CDF p_W(s) = (\u03c0/2) s exp(-\u03c0 s^2 / 4), and store results in JSON along with mean spacing. Save arrays of phases, spacings, and histogram counts for optional offline plotting.",
         "Interestingness": 9,
         "Feasibility": 8,
         "Novelty": 8,
         "novel": false
     },
     {
-        "Name": "matrix_element_gaussianity",
-        "Title": "Gaussianity and Concentration of Rescaled Entries in Haar Random SO(N) Matrices",
-        "Experiment": "Extend the script so that, for each sampled SO(N) matrix, every entry is rescaled by sqrt(N). Collect either all rescaled entries or a random subset to control memory, and repeat for several N values (e.g. 3, 5, 10, 20, 50, 100). For each N compute (i) histogram or KDE of rescaled entries, (ii) first four moments, (iii) Kolmogorov\u2013Smirnov distance to the standard normal, and (iv) optional pairwise entry correlations. Plot KS distance, skewness, and excess kurtosis versus N to illustrate convergence to Gaussian behaviour, providing an empirical demonstration of the local central-limit phenomenon for Haar random orthogonal matrices.",
-        "Interestingness": 7,
-        "Feasibility": 9,
-        "Novelty": 6,
+        "Name": "entry_concentration_so_n",
+        "Title": "Entry-wise Concentration and Maximum Entry Statistics in Haar-Random SO(N) Matrices",
+        "Experiment": "For N in [3,5,10,20,50], generate num_samples Haar-random matrices. Collect: (i) all entries; compute their empirical mean, variance, and Kolmogorov\u2013Smirnov distance between sqrt(N)*entries and N(0,1). (ii) For each matrix, randomly sample 100 distinct column pairs, record their inner products; report overall mean and variance. (iii) Record the maximum absolute entry of each matrix; build its histogram and report mean and std, comparing mean*sqrt(N) to sqrt(2*log(N)). Store per-N statistics and raw arrays in JSON for later analysis.",
+        "Interestingness": 8,
+        "Feasibility": 10,
+        "Novelty": 7,
         "novel": false
     }
 ]
