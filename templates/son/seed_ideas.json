@@ -1,10 +1,10 @@
 [
-    {
-        "Name": "trace_distribution_so_n",
-        "Title": "Statistical Analysis of Trace Distribution in Random SO(N) Matrices",
-        "Experiment": "Generate a large number of random SO(N) matrices and analyze the distribution of their traces. Compare the empirical distribution to theoretical predictions, if available. Investigate how the distribution changes with N.",
-        "Interestingness": 8,
-        "Feasibility": 9,
-        "Novelty": 7
-    }
+  {
+    "Name": "switch_sun_to_son",
+    "Title": "Switch Baseline from SU(N) to SO(N) and Keep Comparable Metrics",
+    "Experiment": "Modify experiment.py to replace SU(N) generation with SO(N) generation using QR factorization and a det=+1 correction. Preserve the output JSON schema (final_info.json with a 'means' dictionary of scalars) so results remain directly comparable to the existing SU(N) baseline. Compute analogous metrics for SO(N): determinant deviation from +1, orthogonality deviation (||U^T U - I||_max), and Frobenius norms to the identity for several generation scales. Update notes to briefly compare SO(N) vs SU(N).",
+    "Interestingness": 7,
+    "Feasibility": 10,
+    "Novelty": 5
+  }
 ]

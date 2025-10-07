@@ -1,29 +1,11 @@
 [
-    {
-        "Name": "trace_distribution_so_n",
-        "Title": "Statistical Analysis of Trace Distribution in Random SO(N) Matrices",
-        "Experiment": "Generate a large number of random SO(N) matrices and analyze the distribution of their traces. Compare the empirical distribution to theoretical predictions, if available. Investigate how the distribution changes with N.",
-        "Interestingness": 8,
-        "Feasibility": 9,
-        "Novelty": 7,
-        "novel": false
-    },
-    {
-        "Name": "eigen_spacing_so_n",
-        "Title": "Level-Spacing Statistics of Haar-Random SO(N) Matrices and Comparison to the Circular Orthogonal Ensemble",
-        "Experiment": "Extend experiment.py by adding a function eigen_level_spacings(M) that computes sorted eigen-phases (angles) of M, normalises nearest-neighbour spacings so the mean is 1, and returns all spacings. In the main loop, accumulate spacings across all samples. Also test uniformity of raw eigen-phases. For each chosen N (e.g., 3, 5, 10, 20), build a histogram of spacings, compute the Kolmogorov\u2013Smirnov distance between the empirical CDF and the Wigner surmise CDF p_W(s) = (\u03c0/2) s exp(-\u03c0 s^2 / 4), and store results in JSON along with mean spacing. Save arrays of phases, spacings, and histogram counts for optional offline plotting.",
-        "Interestingness": 9,
-        "Feasibility": 8,
-        "Novelty": 8,
-        "novel": false
-    },
-    {
-        "Name": "entry_concentration_so_n",
-        "Title": "Entry-wise Concentration and Maximum Entry Statistics in Haar-Random SO(N) Matrices",
-        "Experiment": "For N in [3,5,10,20,50], generate num_samples Haar-random matrices. Collect: (i) all entries; compute their empirical mean, variance, and Kolmogorov\u2013Smirnov distance between sqrt(N)*entries and N(0,1). (ii) For each matrix, randomly sample 100 distinct column pairs, record their inner products; report overall mean and variance. (iii) Record the maximum absolute entry of each matrix; build its histogram and report mean and std, comparing mean*sqrt(N) to sqrt(2*log(N)). Store per-N statistics and raw arrays in JSON for later analysis.",
-        "Interestingness": 8,
-        "Feasibility": 10,
-        "Novelty": 7,
-        "novel": false
-    }
+  {
+    "Name": "switch_sun_to_son",
+    "Title": "Switch Experiment Group from SU(N) to SO(N) and Compare to Baseline",
+    "Experiment": "Modify experiment.py to replace SU(N) sampling with SO(N) sampling using QR decomposition with det=+1 correction. Preserve the existing output schema (final_info.json with a 'means' section of scalar metrics) so results remain comparable to the current SU(N) baseline in run_0. Compute analogous metrics for SO(N): determinant deviation from +1, orthogonality max deviation (||U^T U - I||_max), and Frobenius norms vs identity for a small set of generation scales (or equivalent). After running, update notes.txt to briefly compare SO(N) results against the SU(N) baseline means and highlight key differences.",
+    "Interestingness": 7,
+    "Feasibility": 10,
+    "Novelty": 5,
+    "novel": true
+  }
 ]

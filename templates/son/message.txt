@@ -1,0 +1,80 @@
+(* SU(N)のLie代数要素をガウス分布に従って生成する関数 *)
+GenerateSUNLieAlgebraElement[n_, σ_] := Module[
+  {realPart, imagPart, H},
+
+  (* n×n複素行列のランダム生成 *)
+  (* 実部と虚部を独立にガウス分布から生成 *)
+  realPart = RandomVariate[NormalDistribution[0, σ/Sqrt[2]], {n, n}];
+  imagPart = RandomVariate[NormalDistribution[0, σ/Sqrt[2]], {n, n}];
+
+  (* 複素行列Hを構成 *)
+  H = realPart + I*imagPart;
+
+  (* 反エルミート行列にする: X = (H - H†)/2 *)
+  (* トレースレスにする: X -> X - Tr(X)/n * I *)
+  With[{X = (H - ConjugateTranspose[H])/2},
+    X - Tr[X]/n * IdentityMatrix[n]
+  ]
+];
+
+(* SU(N)の群要素をガウス分布に従って生成する関数 *)
+GenerateSUNElement[n_, σ_] := Module[
+  {X},
+
+  (* Lie代数要素を生成 *)
+  X = GenerateSUNLieAlgebraElement[n, σ];
+
+  (* 指数写像でSU(N)の群要素を得る *)
+  MatrixExp[X]
+];
+
+(* 複数のSU(N)要素を生成する関数 *)
+GenerateSUNSample[n_, σ_, sampleSize_] := 
+  Table[GenerateSUNElement[n, σ], {sampleSize}];
+
+(* ユーティリティ関数：行列がSU(N)の要素かチェック *)
+CheckSUN[U_, n_, tolerance_:10^(-10)] := Module[
+  {detCheck, unitaryCheck},
+
+  (* 行列式が1かチェック *)
+  detCheck = Abs[Det[U] - 1] < tolerance;
+
+  (* ユニタリ性をチェック *)
+  unitaryCheck = Max[Abs[Flatten[U.ConjugateTranspose[U] - IdentityMatrix[n]]]] < tolerance;
+
+  detCheck && unitaryCheck
+];
+
+(* 使用例 *)
+
+(* SU(2)の要素を生成 *)
+su2Element = GenerateSUNElement[2, 1.0];
+Print["SU(2) element:"];
+Print[MatrixForm[su2Element]];
+Print["Is it in SU(2)? ", CheckSUN[su2Element, 2]];
+Print["Det = ", Det[su2Element]];
+
+(* SU(3)の要素を複数生成 *)
+Print["\nGenerating 5 SU(3) elements:"];
+su3Sample = GenerateSUNSample[3, 0.5, 5];
+Do[
+  Print["Element ", i, ": ", 
+    If[CheckSUN[su3Sample[[i]], 3], "Valid SU(3)", "Invalid"]],
+  {i, 1, 5}
+];
+
+(* Lie代数要素の性質を確認 *)
+Print["\nLie algebra element properties:"];
+lieElement = GenerateSUNLieAlgebraElement[3, 1.0];
+Print["Trace = ", Tr[lieElement]];
+Print["Is anti-Hermitian? ", 
+  Max[Abs[Flatten[lieElement + ConjugateTranspose[lieElement]]]] < 10^(-10)];
+
+(* パラメータσの効果を可視化 *)
+Print["\nEffect of σ parameter:"];
+Do[
+  U = GenerateSUNElement[2, σ];
+  Print["σ = ", σ, ", ||U - I||_F = ", 
+    Norm[Flatten[U - IdentityMatrix[2]], "Frobenius"]],
+  {σ, {0.1, 0.5, 1.0, 2.0}}
+];
